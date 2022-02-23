@@ -43,10 +43,15 @@ void *myalloc(size_t size) {
     while (cur != NULL) {
         // if this node is big enough and not in use:
         if (!cur->in_use && cur->size >= padded_size) {
-            //  # vvv splitting code ^^^
             split_space(cur, size);
+	    // start cur at head
 
-            // # ^^^ splitting code ^^^
+		// while cur->next isn't NULL:
+		// 	if cur is not in_use and next node not in use:
+		// 		add the next node's region's size to cur's
+		// 		make cur's next pointer skip the next node
+		// 	else
+		// 		move cur to next node		
             // mark it in use
             cur->in_use = 1;
             // printf("Found one!\n");
